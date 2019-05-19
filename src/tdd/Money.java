@@ -2,13 +2,19 @@ package tdd;
 
 public abstract class Money {
 	protected int amount;
+	private String currency; 
 
-	static Dollar dollar(int amount) {
-		return new Dollar(amount);
+	Money(int amount, String currency) {
+		this.amount = amount;
+		this.currency = currency;
+	}
+
+	static Money dollar(int amount) {
+		return new Dollar(amount, "USD");
 	}
 
 	static Money franc(int amount) {
-		return new Franc(amount);
+		return new Franc(amount, "CHF");
 	}
 
 	abstract Money times(int multiplier);
@@ -16,5 +22,9 @@ public abstract class Money {
 	public boolean equals(Object object) {
 		Money money = (Money) object;
 		return amount == money.amount && getClass().equals(money.getClass());
+	}
+	
+	String currency() {
+		return currency;
 	}
 }
